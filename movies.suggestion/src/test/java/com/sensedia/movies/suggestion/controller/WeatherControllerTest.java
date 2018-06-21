@@ -28,15 +28,6 @@ public class WeatherControllerTest {
 		Assert.assertNotNull(currentWeather.getMain().getTemp());
 	}
 	
-	@Test
-	public void testWeatherInSaoPauloWithEncodedUrlFormat() {
-		CurrentWeather currentWeather = getCurrentWeather(BRASIL, "são paulo");
-
-		Assert.assertEquals("São Paulo", currentWeather.getName());
-		Assert.assertEquals(Integer.valueOf(200), currentWeather.getCod());
-		Assert.assertNotNull(currentWeather.getMain().getTemp());
-	}
-	
 	private CurrentWeather getCurrentWeather(String country, String city) {
 		String uri = UriComponentsBuilder.fromHttpUrl(BASE_PATH).buildAndExpand(country, city).toUriString();
 

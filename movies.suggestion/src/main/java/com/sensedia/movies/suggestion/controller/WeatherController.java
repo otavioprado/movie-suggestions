@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sensedia.movies.suggestion.commons.rest.exceptions.WeatherException;
 import com.sensedia.movies.suggestion.model.weather.CurrentWeather;
 import com.sensedia.movies.suggestion.service.WeatherService;
 
@@ -16,7 +17,8 @@ public class WeatherController {
 	private WeatherService weatherService;
 
 	@RequestMapping(value = "/{country}/{city}/temperature", method = RequestMethod.GET)
-	public CurrentWeather getTemperature(@PathVariable String country, @PathVariable String city) {
+	public CurrentWeather getTemperature(@PathVariable String country, @PathVariable String city)
+			throws WeatherException {
 		return weatherService.getTemperature(city, country);
 	}
 }
