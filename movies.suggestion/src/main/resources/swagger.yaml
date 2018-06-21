@@ -1,0 +1,114 @@
+swagger: "2.0"
+info:
+  description: "documentation for sensedia challenge api: movie suggestions"
+  version: "1.0.0"
+  title: "Sensedia: movie suggestions"
+host: "localhost:8080"
+basePath: "/"
+tags:
+- name: "Movie suggestions"
+  description: "Receive movie recommendations considering the temperature of the city where you are"
+  externalDocs:
+    description: "Find out more"
+    url: "http://sensedia.com"
+schemes:
+- "https"
+- "http"
+paths:
+  /{country}/{city}/temperature:
+    get:
+      tags:
+      - "Weather informations"
+      summary: "Finds temperature by country and city"
+      description: "Multiple status values can be provided with comma separated strings"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "country"
+        in: "path"
+        description: "Country"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "path"
+        description: "Country"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Weather"
+        400:
+          description: "Invalid status value"
+  /movie/suggestions:
+    get:
+      tags:
+      - "Movie Suggestions"
+      summary: "Finds movies by temperature"
+      description: "Multiple status values can be provided with comma separated strings"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "temperatureInCelsius"
+        in: "query"
+        description: "Temperature"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/MovieSuggestions"
+        400:
+          description: "Invalid status value"
+definitions:
+  Weather:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      weather:
+        type: "object"
+        properties:
+          id:
+            type: "string"
+          main:
+            type: "string"
+          description:
+            type: "string"
+      name:
+        type: "string"
+      cod:
+        type: "integer"
+      main:
+        type: "object"
+        properties:
+          temp:
+            type: "integer"
+          pressure:
+            type: "integer"
+          humidity:
+            type: "integer"
+  MovieSuggestions:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      title:
+        type: "string"
+      genreIds:
+        type: "array"
+        items:
+          type: integer
+          format: int64
+          example: 1
+      trailer:
+        type: "object"
+        properties:
+          url:
+            type: "string"

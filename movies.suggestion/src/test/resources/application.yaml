@@ -1,0 +1,8 @@
+server:
+     port: 8888
+     
+themoviedb:
+     api_key: a12dcec926ac95d0b5cb0878843f7662
+     
+openweathermap:
+     api_key: ecb0a799fb3ad053baa48987233c8386
